@@ -24,7 +24,7 @@ let contenitore = (document.getElementById("app").innerHTML +=
   numeriGenerati.join(" - "));
 
 // FUNZIONE DI COUNTDOWN CON VERIFICA FINALE
-let timeLeft = 2;
+let timeLeft = 30;
 let elem = document.getElementById("timer");
 let timerId = setInterval(countdown, 1000);
 
