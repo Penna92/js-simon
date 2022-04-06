@@ -5,9 +5,9 @@
 
 // GENERO 5 NUMERI CASUALI TRA 1 E 100 E LI INSERISCO IN UN ARRAY
 let numeriGenerati = [];
-let listaNumeriCasuali;
 let i = 0;
 let stringaNumeriGenerati = "";
+
 while (numeriGenerati.length < 5) {
   const numeroCasuale = Math.floor(Math.random() * 100) + 1;
   if (!numeriGenerati.includes(numeroCasuale)) {
@@ -15,10 +15,7 @@ while (numeriGenerati.length < 5) {
   }
 }
 
-console.log(numeriGenerati);
-
 for (i = 0; i < numeriGenerati.length; i++) {
-  listaNumeriCasuali = numeriGenerati[i];
   stringaNumeriGenerati = stringaNumeriGenerati + numeriGenerati[i] + " ";
 }
 
@@ -27,7 +24,7 @@ let contenitore = (document.getElementById("app").innerHTML +=
   numeriGenerati.join(" - "));
 
 // FUNZIONE DI COUNTDOWN CON VERIFICA FINALE
-let timeLeft = 30;
+let timeLeft = 2;
 let elem = document.getElementById("timer");
 let timerId = setInterval(countdown, 1000);
 
@@ -37,10 +34,11 @@ function countdown() {
   }
   if (timeLeft == -1) {
     clearTimeout(timerId);
+
     let stringaRisultante = chiediNumeri();
     document.getElementById(
       "app"
-    ).innerHTML += `<div> I 5 numeri da te selezionati sono: ${stringaRisultante} </div> <div>I 5 numeri generati randomicamente sono: ${stringaNumeriGenerati} </div>`;
+    ).innerHTML += `<p> I 5 numeri da te selezionati sono: ${stringaRisultante} </p> <p>I 5 numeri generati randomicamente sono: ${stringaNumeriGenerati} </p>`;
   } else {
     elem.innerHTML = timeLeft + " secondi rimasti per memorizzare i 5 numeri";
     timeLeft--;
@@ -48,34 +46,34 @@ function countdown() {
 }
 
 //CHIEDO I NUMERI ALL'UTENTE
-
 function chiediNumeri() {
   let sceltaNumero;
   let arrayConfronto = [];
   let stringaNumeriScelti = "";
+  let contenitoreNumeriUtente = [];
   for (let i = 0; i < numeriGenerati.length; i++) {
     sceltaNumero = parseInt(prompt("Inserisci il " + (i + 1) + "° numero :"));
     stringaNumeriScelti = stringaNumeriScelti + sceltaNumero + " ";
-    console.log(stringaNumeriScelti);
-    // console.log(numeriGenerati[i]);
+    contenitoreNumeriUtente.push(sceltaNumero);
+    // console.log(contenitoreNumeriUtente);
     if (
       numeriGenerati.includes(parseInt(sceltaNumero)) &&
       !arrayConfronto.includes(sceltaNumero)
     ) {
       arrayConfronto.push(sceltaNumero);
-      console.log(arrayConfronto, arrayConfronto[i]);
-      console.log(numeriGenerati[i]);
-      document.getElementById("app").innerHTML += `${
+      document.getElementById("app").innerHTML += `<p>${
         i + 1
-      }° numero inserito : ${sceltaNumero} (Giusto!) <br>`;
+      }° numero inserito : ${sceltaNumero} (Giusto!) </p>`;
     } else {
-      document.getElementById("app").innerHTML += `${
+      document.getElementById("app").innerHTML += `<p>${
         i + 1
-      }° numero inserito : ${sceltaNumero} (Sbagliato!) <br>`;
+      }° numero inserito : ${sceltaNumero} (Sbagliato!) </p>`;
     }
   }
-
-  //   console.log(listaNumeriCasuali);
-  //   console.log(numeriGenerati);
+  //   console.log(numeriGenerati, contenitoreNumeriUtente);
+  //   console.log(arrayConfronto.length);
+  document.getElementById(
+    "app"
+  ).innerHTML += `<h2> Hai indovinato ${arrayConfronto.length} numeri </h2>`;
   return stringaNumeriScelti;
 }
